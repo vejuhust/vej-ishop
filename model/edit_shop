@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>iShop - Edit Shop Record</title>
+<link rel="stylesheet" type="text/css" href="view.css" media="all">
+<script type="text/javascript" src="view.js"></script>
+
+</head>
+<body id="main_body" >
+	
+	<img id="top" src="top.png" alt="">
+	<div id="form_container">
+	
+		<h1><a>Edit Shop Record</a></h1>
+		<form id="form_5749" class="appnitro"  method="GET" action="../cgi-bin/edit_shop">
+					<div class="form_description">
+			<h2>Edit Shop Record</h2>
+			<p>Modify Items Directly or Just Leave it Empty to Keep it Unchanged</p>
+		</div>						
+			<ul >
+			
+					<li id="li_4" >
+		<label class="description" for="web_num">Website </label>
+		<div>
+		<select class="element select large" id="element_4" name="web_num"> 
+			<option value="" selected="selected"></option>
+
+[[0]]
+
+		</select>
+		</div><p class="guidelines" id="guide_4"><small>choose the site to which it belongs.</small></p> 
+		</li>		<li id="li_1" >
+		<label class="description" for="shop_id">Shop ID </label>
+		<div>
+			<input id="element_1" name="shop_id" class="element text large" type="text" maxlength="20" value="[[1]]"/> 
+		</div><p class="guidelines" id="guide_1"><small>input the shop ID, maximum of 20 characters in length.</small></p> 
+		</li>		<li id="li_2" >
+		<label class="description" for="shop_name">Shop Name </label>
+		<div>
+			<input id="element_2" name="shop_name" class="element text large" type="text" maxlength="30" value="[[2]]"/> 
+		</div><p class="guidelines" id="guide_2"><small>input the shop name, maximum of 30 characters in length.</small></p> 
+		</li>		<li id="li_3" >
+		<label class="description" for="owner">Owner </label>
+		<div>
+			<input id="element_3" name="owner" class="element text large" type="text" maxlength="255" value="[[3]]"/> 
+		</div><p class="guidelines" id="guide_3"><small>who owns this shop.</small></p> 
+		</li>		<li id="li_5" >
+		<label class="description" for="shop_area">Location </label>
+		<div>
+		<select class="element select large" id="element_5" name="shop_area"> 
+			<option value="" selected="selected"></option>
+
+[[4]]
+
+
+		</select>
+		</div><p class="guidelines" id="guide_5"><small>where the owner lives.</small></p> 
+		</li>		<li id="li_6" >
+		<label class="description" for="bank">Bank </label>
+		<div>
+		<select class="element select large" id="element_6" name="bank"> 
+			<option value="" selected="selected"></option>
+
+[[5]]
+
+		</select>
+		</div><p class="guidelines" id="guide_6"><small>where the owner's account is.</small></p> 
+		</li>
+			
+					<li class="buttons">
+			    <input type="hidden" name="old1" value="[[6]]">
+			    <input type="hidden" name="old2" value="[[7]]">
+		<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
+		<input id="saveForm" class="button_text" type="reset"  name="reset"  value="Reset"/>
+
+		</li>
+			</ul>
+		</form>	
+		<div id="footer">
+
+<p align="center"><a href="../cgi-bin/which_shop?edit">click here to return</a></p>
+
+			Powered by <a href="mailto:524706411@qq.com">iShop</a>
+		</div>
+	</div>
+	<img id="bottom" src="bottom.png" alt="">
+	</body>
+</html>
+

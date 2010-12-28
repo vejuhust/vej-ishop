@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>iShop - [[0]] Shop Record</title>
+<link rel="stylesheet" type="text/css" href="view.css" media="all">
+<script type="text/javascript" src="view.js"></script>
+
+</head>
+<body id="main_body" >
+	
+	<img id="top" src="top.png" alt="">
+	<div id="form_container">
+	
+		<h1><a>[[1]] Shop Record</a></h1>
+		<form id="form_5749" class="appnitro"  method="GET" action="../cgi-bin/[[2]]">
+					<div class="form_description">
+			<h2>[[3]] Shop Record</h2>
+			<p>Choose the Shop Record You Want to [[4]]</p>
+		</div>						
+			<ul >
+			
+					<li id="li_4" >
+		<label class="description" for="web_num">Shop </label>
+		<div>
+		<select class="element select large" id="element_4" name="web_num"> 
+			<option value="" selected="selected"></option>
+
+[[5]]
+
+
+		</select>
+		</div><p class="guidelines" id="guide_4"><small>choose the shop and click the submit.</small></p> 
+		</li>
+			
+					<li class="buttons">
+			    
+		<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
+		<input id="saveForm" class="button_text" type="reset"  name="reset"  value="Reset"/>
+
+		</li>
+			</ul>
+		</form>	
+		<div id="footer">
+
+<p align="center"><a href="../index.htm">click here to return</a></p>
+
+			Powered by <a href="mailto:524706411@qq.com">iShop</a>
+		</div>
+	</div>
+	<img id="bottom" src="bottom.png" alt="">
+	</body>
+</html>
+

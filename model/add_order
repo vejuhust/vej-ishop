@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>iShop - Add Order Record</title>
+<link rel="stylesheet" type="text/css" href="view.css" media="all">
+<script type="text/javascript" src="view.js"></script>
+<script type="text/javascript" src="calendar.js"></script>
+</head>
+<body id="main_body" >
+	
+	<img id="top" src="top.png" alt="">
+	<div id="form_container">
+	
+		<h1><a>Add Order Record</a></h1>
+		<form id="form_5860" class="appnitro"  method="GET" action="../cgi-bin/add_order">
+					<div class="form_description">
+			<h2>Add Order Record</h2>
+			<p>Input Related Information to Create a New Order Record</p>
+		</div>						
+			<ul >
+			
+					<li id="li_3" >
+		<label class="description" for="web_num">Shop </label>
+		<div>
+		<select class="element select large" id="element_3" name="web_num"> 
+			<option value="" selected="selected"></option>
+
+[[0]]
+
+
+		</select>
+		</div><p class="guidelines" id="guide_3"><small>who sells it?</small></p> 
+		</li>		<li id="li_4" >
+		<label class="description" for="pay">Payment Method </label>
+		<div>
+		<select class="element select medium" id="element_4" name="pay"> 
+			<option value="" selected="selected"></option>
+
+<option value="1" >Credit Card</option>
+<option value="2" >Gift Card</option>
+<option value="3" >Bank Account</option>
+<option value="4" >Cash on Delivery</option>
+
+		</select>
+		</div><p class="guidelines" id="guide_4"><small>how the buyer paid?</small></p> 
+		</li>		<li id="li_1" >
+		<label class="description" for="money">Sum </label>
+		<div>
+			<input id="element_1" name="money" class="element text medium" type="text" maxlength="40" value=""/> 
+		</div><p class="guidelines" id="guide_1"><small>how much did he pay?</small></p> 
+		</li>		<li id="li_2" >
+		<label class="description" for="date">Date </label>
+		<span>
+			<input id="element_2_1" name="month" class="element text" size="2" maxlength="2" value="" type="text"> /
+			<label for="element_2_1">MM</label>
+		</span>
+		<span>
+			<input id="element_2_2" name="day" class="element text" size="2" maxlength="2" value="" type="text"> /
+			<label for="element_2_2">DD</label>
+		</span>
+		<span>
+	 		<input id="element_2_3" name="year" class="element text" size="4" maxlength="4" value="" type="text">
+			<label for="element_2_3">YYYY</label>
+		</span>
+	
+		<span id="calendar_2">
+			<img id="cal_img_2" class="datepicker" src="calendar.gif" alt="Pick a date.">	
+		</span>
+		<script type="text/javascript">
+			Calendar.setup({
+			inputField	 : "element_2_3",
+			baseField    : "element_2",
+			displayArea  : "calendar_2",
+			button		 : "cal_img_2",
+			ifFormat	 : "%B %e, %Y",
+			onSelect	 : selectDate
+			});
+		</script>
+		<p class="guidelines" id="guide_2"><small>when did this happen?</small></p> 
+		</li>		<li id="li_5" >
+		<label class="description" for="order_area">Location </label>
+		<div>
+		<select class="element select medium" id="element_5" name="order_area"> 
+			<option value="" selected="selected"></option>
+
+<option value="1" >Anhui</option>
+<option value="2" >Beijing</option>
+<option value="3" >Chongqing</option>
+<option value="4" >Fujian</option>
+<option value="5" >Gansu</option>
+<option value="6" >Guangdong</option>
+<option value="7" >Guangxi</option>
+<option value="8" >Guizhou</option>
+<option value="9" >Hainan</option>
+<option value="10" >Hebei</option>
+<option value="11" >Heilongjiang</option>
+<option value="12" >Henan</option>
+<option value="13" >Hong Kong</option>
+<option value="14" >Hubei</option>
+<option value="15" >Hunan</option>
+<option value="16" >Inner Mongolia</option>
+<option value="17" >Jiangsu</option>
+<option value="18" >Jiangxi</option>
+<option value="19" >Jilin</option>
+<option value="20" >Liaoning</option>
+<option value="21" >Macau</option>
+<option value="22" >Ningxia</option>
+<option value="23" >Qinghai</option>
+<option value="24" >Shaanxi</option>
+<option value="25" >Shandong</option>
+<option value="26" >Shanghai</option>
+<option value="27" >Shanxi</option>
+<option value="28" >Sichuan</option>
+<option value="29" >Taiwan</option>
+<option value="30" >Tianjin</option>
+<option value="31" >Tibet</option>
+<option value="32" >Xinjiang</option>
+<option value="33" >Yunnan</option>
+<option value="34" >Zhejiang</option>
+
+
+
+		</select>
+		</div><p class="guidelines" id="guide_5"><small>where the buyer lives.</small></p> 
+		</li>
+			
+					<li class="buttons">
+		<input id="saveForm" class="button_text" type="submit" name="submit" value="Add" />
+		<input id="saveForm" class="button_text" type="reset"  name="reset"  value="Reset"/>
+		</li>
+			</ul>
+		</form>	
+		<div id="footer">
+			<p align="center"><a href="../index.htm">click here to return</a></p>
+			Powered by <a href="mailto:524706411@qq.com">iShop</a>
+		</div>
+	</div>
+	<img id="bottom" src="bottom.png" alt="">
+	</body>
+</html>
