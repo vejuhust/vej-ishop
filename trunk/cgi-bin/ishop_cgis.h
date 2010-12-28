@@ -11,18 +11,18 @@
 #include <math.h>
 
 
-#define TMPFILE     "/tmp/iShopTmpfile"                     /*分析反馈的临时文件*/
-#define FIFO_IN     "/tmp/iShopFIFOinput"                   /*FIFO输入管道*/
-#define FIFO_OUT    "/tmp/iShopFIFOoutput"                  /*FIFO输出管道*/
-#define ID_MAX      22                                      /*ID类字符串长度*/
-#define NAME_MAX    32                                      /*名称类字符串长度*/
-#define URL_MAX     52                                      /*URL字符串长度*/
-#define RECENT_MAX  42                                      /*RECENT字符串长度*/
-#define TMPSTR_MAX  102400                                  /*临时字符串长度*/
-#define MSG_MAX     102400                                  /*输入指令串长度*/
-#define WEB_MAX     1024                                    /*一级链表最大节点数*/
-#define SHOP_MAX    1024                                    /*二级链表最大节点数*/
-#define ORDER_MAX   1024                                    /*三级链表最大节点数*/
+#define TMPFILE     "/tmp/iShopTmpfile"         /*分析反馈的临时文件*/
+#define FIFO_IN     "/tmp/iShopFIFOinput"       /*FIFO输入管道*/
+#define FIFO_OUT    "/tmp/iShopFIFOoutput"      /*FIFO输出管道*/
+#define ID_MAX      22                          /*ID类字符串长度*/
+#define NAME_MAX    32                          /*名称类字符串长度*/
+#define URL_MAX     52                          /*URL字符串长度*/
+#define RECENT_MAX  42                          /*RECENT字符串长度*/
+#define TMPSTR_MAX  102400                      /*临时字符串长度*/
+#define MSG_MAX     102400                      /*输入指令串长度*/
+#define WEB_MAX     1024                        /*一级链表最大节点数*/
+#define SHOP_MAX    1024                        /*二级链表最大节点数*/
+#define ORDER_MAX   1024                        /*三级链表最大节点数*/
 
 
 /*日期类型struct结构*/
@@ -172,52 +172,63 @@ char * pay_list[] = {
     NULL
 };
 
-
+/*网页显示用月份名称*/
 char * month_list [] = {
     NULL,
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "January",                                  /*janvier*/
+    "February",                                 /*fevrier*/
+    "March",                                    /*mars*/
+    "April",                                    /*avril*/
+    "May",                                      /*mai*/
+    "June",                                     /*juin*/
+    "July",                                     /*juillet*/
+    "August",                                   /*aout*/
+    "September",                                /*septembre*/
+    "October",                                  /*octobre*/
+    "November",                                 /*novembre*/
+    "December",                                 /*decembre*/
     NULL
 };
 
+/*网页显示用月份缩写*/
 char * month_list_abbr [] = {
     NULL,
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sept",
-    "Oct",
-    "Nov",
-    "Dec",
+    "Jan",                                      /*enero*/
+    "Feb",                                      /*febrero*/
+    "Mar",                                      /*marzo*/
+    "Apr",                                      /*abril*/
+    "May",                                      /*mayo*/
+    "Jun",                                      /*junio*/
+    "Jul",                                      /*julio*/
+    "Aug",                                      /*agosto*/
+    "Sept",                                     /*septiembre*/
+    "Oct",                                      /*octubre*/
+    "Nov",                                      /*noviembre*/
+    "Dec",                                      /*diciembre*/
     NULL
 };
 
-extern int     h_errno;                     /*sockets用错误变量，在netdb.h中定义*/
-extern char ** environ;                     /*环境表指针*/
+
+extern int     h_errno;                         /*sockets用错误变量*/
+extern char ** environ;                         /*环境表指针*/
+
 
 /*针对GNU特有的strcasestr()的函数原型之声明*/
 /*warning: strcasestr is a GNU specific extension to the C standard.*/
 char *strcasestr(const char *haystack, const char *needle);
 
+
+/*UNIX类错误处理*/
 int  unix_error(char * msg);
+
+/*execve()系统调用的封装*/
 void Execve(const char * filename, char * const argv[], char * const envp[]);
+
+/*将URL中的以%xx方式表示的字符还原为ASCII字符*/
 void recovery_url(char * str);
 
+
+/*model文件中数据填入的标记*/
 const char * m0 = "[[0]]";
 const char * m1 = "[[1]]";
 const char * m2 = "[[2]]";
@@ -228,4 +239,5 @@ const char * m6 = "[[6]]";
 const char * m7 = "[[7]]";
 const char * m8 = "[[8]]";
 const char * m9 = "[[9]]";
+
 
