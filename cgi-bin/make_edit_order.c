@@ -1,10 +1,11 @@
 #include "ishop_cgis.h"
 
-#define STR_MAX     102400
-#define PART_MAX    20
-#define MODEL       "model/edit_order"
-#define PAGE        "baby/edit_order.htm"
+#define PART_MAX    20                            /*Matrix指令参数的最大个数*/
+#define STR_MAX     102400                        /*临时字符串长度*/
+#define MODEL       "model/edit_order"            /*网页模板文件地址*/
+#define PAGE        "baby/edit_order.htm"         /*生成的网页的地址*/
 
+/*Matrix指令O格式*/
 char * item[] = {
     "web_num",
     "shop_id",
@@ -12,15 +13,17 @@ char * item[] = {
     NULL
 };
 
+/*最终向客户端发送的meta refresh代码*/
 const char * meta = "<meta http-equiv=\"refresh\" content=\"0;"
                     "url=../baby/edit_order.htm\" />";
 
-char            tmpstr  [STR_MAX];
-char            clue    [7]   = "[[0]]\0";
-struct shop_t   shop;
-struct order_t  order;
+char            tmpstr  [STR_MAX];                /*临时字符串*/
+char            clue    [7]   = "[[0]]\0";        /*model文件中数据填入的标记*/
+struct shop_t   shop;                             /*Shop链节点*/
+struct order_t  order;                            /*Order链节点*/
 
 
+/*错误处理函数*/
 void error_handler(char * msg, char * msg2) {
     char * emptylist[] = { NULL };
 
@@ -36,6 +39,7 @@ void error_handler(char * msg, char * msg2) {
 }
 
 
+/*将URL拆分、还原出CGI参数，按格式填入相应的Matrix指令*/
 void dispense_url(char type, char * str, char * item[], long cnt, char * ins) {
     char  * head = str;
     char  * c_and;
@@ -43,19 +47,26 @@ void dispense_url(char type, char * str, char * item[], long cnt, char * ins) {
     long    len;
     char  * part[PART_MAX];
 
+    /*清空part数组*/
     memset(part, 0, PART_MAX * sizeof(char *));
     strcat(str, "&");
 
     c_and = strstr(str, "&");
     while (NULL != c_and) {
+
+        /*以&为分隔符提取表单参数*/
         len = c_and - head;
         strncpy(tmpstr, head, len);
         tmpstr[len] = '\0';
 
         for (i = 0; i < cnt; i++) {
+
+            /*按参数名称依次提取*/
             if (NULL != strcasestr(tmpstr, item[i])) {
                 part[i] = (char *) calloc(len + 2, sizeof(char));
                 strcpy(part[i], strstr(tmpstr, "=") + 1);
+
+                /*还原转义符*/
                 recovery_url(part[i]);
                 break;
             }
@@ -64,8 +75,8 @@ void dispense_url(char type, char * str, char * item[], long cnt, char * ins) {
         c_and  = strstr(head, "&");
     }
 
+    /*将结果按格式写入ins字符串*/
     *ins = type;
-
     for (i = 0; i < cnt; i++) {
         if (NULL != part[i]) {
             strcat(ins, part[i]);
@@ -76,17 +87,21 @@ void dispense_url(char type, char * str, char * item[], long cnt, char * ins) {
 }
 
 
+/*分析并还原经FIFO输出管道传递的Matrix反馈信息*/
 void transfer_input(char * str, long len) {
     FILE * file;
     char   type;
 
+    /*将反馈信息存入临时文件*/
     file = fopen(TMPFILE, "wb");
     fwrite(str, sizeof(char), len, file);
     fclose(file);
 
+    /*从临时文件中重新按格式读取*/
     file = fopen(TMPFILE, "rb");
     fread(&type, sizeof(char), 1, file);
 
+    /*若为错误反馈信息*/
     if ('Z' == type) {
         char * msg;
 
@@ -101,6 +116,7 @@ void transfer_input(char * str, long len) {
         error_handler(msg, NULL);
     }
 
+    /*若为操作成功的反馈*/
     if ('O' == type) {
         fread(&len, sizeof(long), 1, file);
         fread(&order, len, 1, file);
@@ -109,11 +125,13 @@ void transfer_input(char * str, long len) {
         error_handler("What the fuck?", NULL);
     }
 
+    /*关闭并删除临时文件*/
     fclose(file);
     remove(TMPFILE);
 }
 
 
+/*获取所有Shop记录的信息列表*/
 void get_shop_list(char * aim) {
     int     output;
     int     input;
@@ -131,43 +149,48 @@ void get_shop_list(char * aim) {
     char  * buf = (char *) calloc(STR_MAX, sizeof(char));
     char  * web = (char *) calloc(STR_MAX, sizeof(char));
 
-    /*send the ins*/
+    /*将指令通过FIFO输入管道传递给Matrix*/
     output = open(FIFO_IN, O_WRONLY | O_TRUNC);
     write(output, ins, strlen(ins));
     close(output);
 
-    /*get the list*/
+    /*等待并打开FIFO输出管道，读取Matrix反馈信息*/
     input = open(FIFO_OUT, O_RDONLY);
     len   = read(input, tmpstr, STR_MAX);
     close(input);
     tmpstr[len] = '\0';
 
+    /*若为错误反馈信息*/
     if ('K' != tmpstr[0]) {
         error_handler("What's happened?", NULL);
     }
 
+    /*将反馈信息存入临时文件*/
     file = fopen(TMPFILE, "wb");
     fwrite(&tmpstr[1], sizeof(char), len, file);
     fclose(file);
 
+    /*从临时文件中重新按格式读取*/
     file = fopen(TMPFILE, "rb");
     fread(&cnt, sizeof(long), 1,   file);
     fread(&num, sizeof(long), cnt, file);
 
-    /**************/
+    /*若为反馈数据为空*/
     if (0 == cnt) {
         fclose(file);
         remove(TMPFILE);
         error_handler("no website record, add one first!", NULL);
     }
-    /**************/
 
+    /*从临时文件中重新按格式读取*/
     fread(&len, sizeof(long), 1,   file);
     fread(&tmpstr, sizeof(char), len, file);
-    fclose(file);
 
+    /*关闭并删除临时文件*/
+    fclose(file);
     remove(TMPFILE);
 
+    /*判断反馈数据是否为空*/
     j = 0;
     for (i = 0; i < cnt; i++) {
         if (0 != num[i]) {
@@ -180,6 +203,7 @@ void get_shop_list(char * aim) {
         error_handler("no shop record, add one first!", NULL);
     }
 
+    /*根据信息生成网页代码串*/
     r0 = tmpstr;
     for (i = 0; i < cnt; i++) {
         r1  = strstr(r0, "\n");
@@ -228,6 +252,8 @@ void get_shop_list(char * aim) {
     strcpy(aim, new);
 }
 
+
+/*将待修改的Order节点信息填入网页模板*/
 void generate_edit_order(void) {
     FILE * file;
     char * mark[15];
@@ -236,11 +262,12 @@ void generate_edit_order(void) {
     char * buf = (char *) calloc(STR_MAX, sizeof(char));
     long i;
 
+    /*载入网页模板*/
     file = fopen(MODEL, "rb");
     fread(str, sizeof(char), STR_MAX, file);
     fclose(file);
 
-            
+    /*寻找并处理网页模板中的标记*/
     for (i = 0; i < 11; i++) {
         clue[2] = i + '0';
         mark[i] = strstr(str, clue);
@@ -250,11 +277,13 @@ void generate_edit_order(void) {
         *(mark[i]) = '\0';
     }
 
+    /*在标记零处填入信息*/
     strcpy(new, str);
     get_shop_list(buf);
     strcat(new, buf);
     mark[0] += 5;
 
+    /*在标记一处填入信息*/
     strcat(new, mark[0]);
     for (i = 1; i <= 4; i++) {
         if (i == order.pay) {
@@ -268,26 +297,31 @@ void generate_edit_order(void) {
     }
     mark[1] += 5;
 
+    /*在标记二处填入信息*/
     strcat(new, mark[1]);
     sprintf(buf, "%.2Lf", order.money);
     strcat(new, buf);
     mark[2] += 5;
 
+    /*在标记三处填入信息*/
     strcat(new, mark[2]);
     sprintf(buf, "%.2ld", order.date.month);
     strcat(new, buf);
     mark[3] += 5;
 
+    /*在标记四处填入信息*/
     strcat(new, mark[3]);
     sprintf(buf, "%.2ld", order.date.day);
     strcat(new, buf);
     mark[4] += 5;
 
+    /*在标记五处填入信息*/
     strcat(new, mark[4]);
     sprintf(buf, "%.4ld", order.date.year);
     strcat(new, buf);
     mark[5] += 5;
 
+    /*在标记六处填入信息*/
     strcat(new, mark[5]);
     for (i = 1; i <= 34; i++) {
         if (i == order.order_area) {
@@ -301,34 +335,39 @@ void generate_edit_order(void) {
     }
     mark[6] += 5;
 
+    /*在标记七处填入信息*/
     strcat(new, mark[6]);
     sprintf(buf, "%ld", order.web_num);
     strcat(new, buf);
     mark[7] += 5;
 
+    /*在标记八处填入信息*/
     strcat(new, mark[7]);
     strcat(new, order.shop_id);
     mark[8] += 5;
 
+    /*在标记九处填入信息*/
     strcat(new, mark[8]);
     sprintf(buf, "%ld", order.order_num);
     strcat(new, buf);
     mark[9] += 5;
 
+    /*在标记十处填入信息*/
     strcat(new, mark[9]);
     sprintf(buf, "../cgi-bin/handle_order?web_num=%ld&shop_id=%s&submit=OK",
                   order.web_num, order.shop_id);
     strcat(new, buf);
     mark[10] += 5;
-
     strcat(new, mark[10]);
 
+    /*生成网页文件*/
     file = fopen(PAGE, "wb");
     fwrite(new, sizeof(char), strlen(new), file);
     fclose(file);
 }
 
 
+/*主函数*/
 int main(int argc, char** argv) {
     int     output;
     int     input;
@@ -336,35 +375,40 @@ int main(int argc, char** argv) {
     char  * ins = (char *) calloc(STR_MAX, sizeof(char) );
     char  * url = (char *) calloc(STR_MAX, sizeof(char));
 
-    /*analyze input*/
+    /*从环境变量中获取CGI参数*/
     strcpy(url, getenv("QUERY_STRING"));
 
+    /*从CGI参数中提取信息，生成Matrix指令*/
     dispense_url('O', url, item, 3, ins);
 
-    /*send it to matrix*/
+    /*通过FIFO输入管道将指令提交给Matrix*/
     output = open(FIFO_IN, O_WRONLY | O_TRUNC);
     write(output, ins, strlen(ins));
     close(output);
 
+    /*释放ins指令字符串所占用的堆空间*/
     free(ins);
 
-    /*get echo from matrix*/
+    /*在FIFO输出管道上读取Matrix的反馈信息*/
     input = open(FIFO_OUT, O_RDONLY);
     len   = read(input, tmpstr, STR_MAX);
     close(input);
     tmpstr[len] = '\0';
 
-    /*get web_t*/
+    /*分析并还原Matrix反馈信息，获取待修改的Order节点数据*/
     transfer_input(tmpstr, len);
 
-    /*generate ...*/
+    /*生成目标网页*/
     generate_edit_order();
 
-    /*meta refresh*/
+    /*向客户端发送meta refresh代码，引导浏览器打开新生成的网页*/
     printf("Content-length: %d\r\n", strlen(meta));
     printf("Content-type: text/html\r\n\r\n");
     printf("%s", meta);
     fflush(stdout);
 
+    /*程序正常退出*/
     exit(0);
 }
+
+
