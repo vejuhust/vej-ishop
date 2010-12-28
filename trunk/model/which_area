@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>iShop - Report</title>
+<link rel="stylesheet" type="text/css" href="view.css" media="all">
+<script type="text/javascript" src="view.js"></script>
+
+</head>
+<body id="main_body" >
+	
+	<img id="top" src="top.png" alt="">
+	<div id="form_container">
+	
+		<h1><a>Top Five Websites</a></h1>
+		<form id="form_5749" class="appnitro"  method="GET" action="../cgi-bin/trade_balance">
+					<div class="form_description">
+			<h2>Trade Balance</h2>
+			<p>Choose the Areas and the Month You Want to Know the Trade Balance</p>
+		</div>						
+			<ul >
+			
+					<li id="li_4" >
+		<label class="description" for="year">Year </label>
+		<div>
+		<select class="element select small" id="element_4" name="year"> 
+			<option value="" selected="selected"></option>
+
+[[0]]
+
+
+		</select>
+		</div><p class="guidelines" id="guide_4"><small>choose the year.</small></p> 
+		</li>
+		
+		<li id="li_3" >
+		<label class="description" for="month">Month </label>
+		<div>
+		<select class="element select small" id="element_4" name="month"> 
+			<option value="" selected="selected"></option>
+
+<option value="1" >January</option>
+<option value="2" >February</option>
+<option value="3" >March</option>
+<option value="4" >April</option>
+<option value="5" >May</option>
+<option value="6" >June</option>
+<option value="7" >July</option>
+<option value="8" >August</option>
+<option value="9" >September</option>
+<option value="10" >October</option>
+<option value="11" >November</option>
+<option value="12" >December</option>
+
+
+		</select>
+		</div><p class="guidelines" id="guide_4"><small>choose the month.</small></p> 
+		</li>
+		
+		
+				<li id="li_2" >
+		<label class="description" for="area_a">Area A </label>
+		<div>
+		<select class="element select medium" id="element_4" name="area_a"> 
+			<option value="" selected="selected"></option>
+
+
+<option value="1" >Anhui</option>
+<option value="2" >Beijing</option>
+<option value="3" >Chongqing</option>
+<option value="4" >Fujian</option>
+<option value="5" >Gansu</option>
+<option value="6" >Guangdong</option>
+<option value="7" >Guangxi</option>
+<option value="8" >Guizhou</option>
+<option value="9" >Hainan</option>
+<option value="10" >Hebei</option>
+<option value="11" >Heilongjiang</option>
+<option value="12" >Henan</option>
+<option value="13" >Hong Kong</option>
+<option value="14" >Hubei</option>
+<option value="15" >Hunan</option>
+<option value="16" >Inner Mongolia</option>
+<option value="17" >Jiangsu</option>
+<option value="18" >Jiangxi</option>
+<option value="19" >Jilin</option>
+<option value="20" >Liaoning</option>
+<option value="21" >Macau</option>
+<option value="22" >Ningxia</option>
+<option value="23" >Qinghai</option>
+<option value="24" >Shaanxi</option>
+<option value="25" >Shandong</option>
+<option value="26" >Shanghai</option>
+<option value="27" >Shanxi</option>
+<option value="28" >Sichuan</option>
+<option value="29" >Taiwan</option>
+<option value="30" >Tianjin</option>
+<option value="31" >Tibet</option>
+<option value="32" >Xinjiang</option>
+<option value="33" >Yunnan</option>
+<option value="34" >Zhejiang</option>
+
+
+
+
+		</select>
+		</div><p class="guidelines" id="guide_4"><small>choose the first area.</small></p> 
+		</li>
+		
+		
+				<li id="li_1" >
+		<label class="description" for="area_b">Area B </label>
+		<div>
+		<select class="element select medium" id="element_4" name="area_b"> 
+			<option value="" selected="selected"></option>
+
+
+<option value="1" >Anhui</option>
+<option value="2" >Beijing</option>
+<option value="3" >Chongqing</option>
+<option value="4" >Fujian</option>
+<option value="5" >Gansu</option>
+<option value="6" >Guangdong</option>
+<option value="7" >Guangxi</option>
+<option value="8" >Guizhou</option>
+<option value="9" >Hainan</option>
+<option value="10" >Hebei</option>
+<option value="11" >Heilongjiang</option>
+<option value="12" >Henan</option>
+<option value="13" >Hong Kong</option>
+<option value="14" >Hubei</option>
+<option value="15" >Hunan</option>
+<option value="16" >Inner Mongolia</option>
+<option value="17" >Jiangsu</option>
+<option value="18" >Jiangxi</option>
+<option value="19" >Jilin</option>
+<option value="20" >Liaoning</option>
+<option value="21" >Macau</option>
+<option value="22" >Ningxia</option>
+<option value="23" >Qinghai</option>
+<option value="24" >Shaanxi</option>
+<option value="25" >Shandong</option>
+<option value="26" >Shanghai</option>
+<option value="27" >Shanxi</option>
+<option value="28" >Sichuan</option>
+<option value="29" >Taiwan</option>
+<option value="30" >Tianjin</option>
+<option value="31" >Tibet</option>
+<option value="32" >Xinjiang</option>
+<option value="33" >Yunnan</option>
+<option value="34" >Zhejiang</option>
+
+
+
+
+		</select>
+		</div><p class="guidelines" id="guide_4"><small>choose the second area.</small></p> 
+		</li>
+		
+		
+			
+					<li class="buttons">
+			    
+		<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
+		<input id="saveForm" class="button_text" type="reset"  name="reset"  value="Reset"/>
+
+		</li>
+			</ul>
+		</form>	
+		<div id="footer">
+
+<p align="center"><a href="../index.htm">click here to return</a></p>
+
+			Powered by <a href="mailto:524706411@qq.com">iShop</a>
+		</div>
+	</div>
+	<img id="bottom" src="bottom.png" alt="">
+	</body>
+</html>
+

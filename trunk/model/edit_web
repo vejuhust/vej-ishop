@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>iShop - Edit Website Record</title>
+<link rel="stylesheet" type="text/css" href="view.css" media="all">
+<script type="text/javascript" src="view.js"></script>
+
+</head>
+<body id="main_body" >
+	
+	<img id="top" src="top.png" alt="">
+	<div id="form_container">
+	
+		<h1><a>Edit Website Record</a></h1>
+		<form id="form_5126" class="appnitro"  method="GET" action="../cgi-bin/edit_web">
+					<div class="form_description">
+			<h2>Edit Website Record</h2>
+			<p>Modify Website Name and URL Directly or Just Leave it Empty to Keep it Unchanged</p>
+		</div>						
+			<ul >
+			
+					<li id="li_1" >
+		<label class="description" for="web_name">Website Name </label>
+		<div>
+			<input id="element_1" name="web_name" class="element text large" type="text" maxlength="30" value="[[0]]"/> 
+		</div><p class="guidelines" id="guide_1"><small>input the website name, maximum of 30 characters in length.</small></p> 
+		</li>		<li id="li_2" >
+		<label class="description" for="url">URL </label>
+		<div>
+			<input id="element_2" name="url" class="element text large" type="text" maxlength="50" value="[[1]]"/> 
+		</div><p class="guidelines" id="guide_2"><small>input the URL, maximum of 50 characters in length.</small></p> 
+		</li>
+			
+		<li class="buttons">
+		<input type="hidden" name="old1" value="[[2]]">
+		<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
+		<input id="saveForm" class="button_text" type="reset"  name="reset"  value="Reset"/>
+		</li>
+			</ul>
+		</form>	
+		<div id="footer">
+<p align="center"><a href="../cgi-bin/which_web?edit">click here to return</a></p>
+			Powered by <a href="mailto:524706411@qq.com">iShop</a>
+		</div>
+	</div>
+	<img id="bottom" src="bottom.png" alt="">
+	</body>
+</html>
+
