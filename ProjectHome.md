@@ -1,0 +1,1 @@
+Vej's iShop is an internet-Based Online Shopping Management System. I developed it as my "C Programming Language" curriculum project.
